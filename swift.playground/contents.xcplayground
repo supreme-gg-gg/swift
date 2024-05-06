@@ -6,5 +6,6 @@
         <page name='protocols'/>
         <page name='generics'/>
         <page name='error-handling'/>
+        <page name='collections'/>
     </pages>
 </playground>
