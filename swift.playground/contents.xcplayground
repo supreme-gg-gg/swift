@@ -7,5 +7,6 @@
         <page name='generics'/>
         <page name='error-handling'/>
         <page name='collections'/>
+        <page name='async'/>
     </pages>
 </playground>
