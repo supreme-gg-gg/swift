@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-struct FrameworkGridViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+/// use a class to hold state
+/// This protocol allows the class to broadcast info if it changes
+/// If not subclassing a class call it "final"
+final class FrameworkGridViewModel: ObservableObject {
+    var selectedFramework: Framework? { // note that it is optional
+        didSet { // any time selectedFramework changes...
+            isShowingDetailView = true
+        }
     }
-}
-
-#Preview {
-    FrameworkGridViewModel()
+    
+    @Published var isShowingDetailView = false // this needs to be published for view to update
+    
+    
 }
