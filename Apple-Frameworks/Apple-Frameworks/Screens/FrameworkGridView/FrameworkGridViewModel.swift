@@ -12,13 +12,16 @@ import SwiftUI
 /// If not subclassing a class call it "final"
 /// 
 final class FrameworkGridViewModel: ObservableObject {
+    
+    /* No longer necessary using NavigationStack
+    
     var selectedFramework: Framework? { // note that it is optional
         didSet { // any time selectedFramework changes...
             isShowingDetailView = true
         }
     }
     
-    @Published var isShowingDetailView = false // this needs to be published for view to update
+    @Published var isShowingDetailView = false // this needs to be published for view to update */
     
     let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     

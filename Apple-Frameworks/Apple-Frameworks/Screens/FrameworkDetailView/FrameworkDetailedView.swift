@@ -10,15 +10,17 @@ import SwiftUI
 struct FrameworkDetailedView: View {
     
     var framework: Framework
-    @Binding var isShowingDetailView: Bool // binding, unlike stage, works across struct & files
+    // @Binding var isShowingDetailView: Bool // binding, unlike stage, works across struct & files
     @State private var isShowingSafariView = false
     
     var body: some View {
         VStack {
             
+            /*
+            
             XDismissButton(isShowingDetailView: $isShowingDetailView)
             
-            Spacer()
+            Spacer() */
             
             FrameworkTitleView(framework: framework)
             Text(framework.description)
@@ -30,8 +32,13 @@ struct FrameworkDetailedView: View {
             Button {
                 isShowingSafariView = true
             } label: {
-                AFButton(title: "Learn More")
-            }
+                // AFButton(title: "Learn More")
+                // iOS 15 allows us to use default system buttons
+                Label("Learn More", systemImage: "book.fill")
+            } // Apple-looking buttons!!
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .tint(.red)
         }
         .sheet(isPresented: $isShowingSafariView, content: {
             SafariView(url: (URL(string: framework.urlString) ?? URL(string:"www.apple.com")!))
@@ -40,5 +47,5 @@ struct FrameworkDetailedView: View {
 }
 
 #Preview {
-    FrameworkDetailedView(framework: MockData.sampleFramework, isShowingDetailView: .constant(false))
+    FrameworkDetailedView(framework: MockData.sampleFramework)
 }

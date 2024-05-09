@@ -17,6 +17,7 @@ struct FrameworkGridView: View {
     
     var body: some View {
         
+        // New NavigationStack update iOS 16!!
         NavigationStack {
             // a "lazy" grid or stack is only rendered when used
             
@@ -26,21 +27,23 @@ struct FrameworkGridView: View {
                     // you can use "ForEach" to iterate through an array to create all the views
                     
                     ForEach(MockData.frameworks, id: \.id) { framework in
-                        FrameworkTitleView(framework: framework)
-                        // think a bit if you don't get it
                         // .\self means hash the object and give its unique ID, note that it must be Hashable
-                            .onTapGesture {
-                                viewModel.selectedFramework = framework
-                            }
+                        NavigationLink(value:framework) {
+                            FrameworkTitleView(framework: framework)
+                        }
                     }
                 })
             }
             .navigationTitle("🍎 Frameworks")
+            .navigationDestination(for: Framework.self) { framework in
+                FrameworkDetailedView(framework: framework)
+            }
             // the "sheet" is listening to the broadcast from ViewModel
             // $ means "binding"
+            /*
             .sheet(isPresented: $viewModel.isShowingDetailView, content: {
                 FrameworkDetailedView(framework: viewModel.selectedFramework ?? MockData.sampleFramework, isShowingDetailView: $viewModel.isShowingDetailView)
-            }) // give content a default value; pass status from view model into detailed view
+            }) */
         }
     }
 }
