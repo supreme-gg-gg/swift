@@ -10,6 +10,7 @@ import SwiftUI
 /// use a class to hold state
 /// This protocol allows the class to broadcast info if it changes
 /// If not subclassing a class call it "final"
+/// 
 final class FrameworkGridViewModel: ObservableObject {
     var selectedFramework: Framework? { // note that it is optional
         didSet { // any time selectedFramework changes...
@@ -19,5 +20,6 @@ final class FrameworkGridViewModel: ObservableObject {
     
     @Published var isShowingDetailView = false // this needs to be published for view to update
     
+    let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
 }

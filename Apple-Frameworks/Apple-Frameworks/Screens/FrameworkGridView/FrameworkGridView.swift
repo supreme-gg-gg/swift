@@ -15,15 +15,13 @@ struct FrameworkGridView: View {
     // recall that state objects will not get destroyed and recreated
     @StateObject var viewModel = FrameworkGridViewModel()
     
-    let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
     var body: some View {
         
         NavigationStack {
             // a "lazy" grid or stack is only rendered when used
             
             ScrollView {
-                LazyVGrid(columns: columns, content: {
+                LazyVGrid(columns: viewModel.columns, content: {
                     
                     // you can use "ForEach" to iterate through an array to create all the views
                     
@@ -49,24 +47,4 @@ struct FrameworkGridView: View {
 
 #Preview {
     FrameworkGridView()
-}
-
-struct FrameworkTitleView: View {
-    
-    let framework: Framework
-    
-    var body: some View {
-        VStack {
-            Image(framework.imageName)
-                .resizable()
-                .frame(width: 90, height: 90)
-            Text(framework.name)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .scaledToFit()
-                .minimumScaleFactor(0.6)
-        }
-        .padding(15)
-    }
-    
 }

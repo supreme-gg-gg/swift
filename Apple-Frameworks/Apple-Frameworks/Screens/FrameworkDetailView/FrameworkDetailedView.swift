@@ -10,27 +10,13 @@ import SwiftUI
 struct FrameworkDetailedView: View {
     
     var framework: Framework
-    @Binding var isShowingDetailView: Bool
+    @Binding var isShowingDetailView: Bool // binding, unlike stage, works across struct & files
+    @State private var isShowingSafariView = false
     
     var body: some View {
         VStack {
             
-            // Human Interface Guideline
-            // an exit button from modality
-            
-            HStack { // push button to right
-                Spacer()
-                
-                Button {
-                    isShowingDetailView = false
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(Color(.label))
-                        .imageScale(.large)
-                        .frame(width: 44, height: 44) // larger area for the user to "click"
-                }
-            }
-            .padding()
+            XDismissButton(isShowingDetailView: $isShowingDetailView)
             
             Spacer()
             
@@ -42,11 +28,14 @@ struct FrameworkDetailedView: View {
             Spacer()
             
             Button {
-                
+                isShowingSafariView = true
             } label: {
                 AFButton(title: "Learn More")
             }
         }
+        .sheet(isPresented: $isShowingSafariView, content: {
+            SafariView(url: (URL(string: framework.urlString) ?? URL(string:"www.apple.com")!))
+        }) // if you want a full page on top use "fullScreenCover" instead of "sheet"
     }
 }
 
